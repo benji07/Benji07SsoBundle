@@ -1,5 +1,14 @@
 <?php
 
+namespace Benji07\SsoBundle\Security\Http\SSO;
+
+use Symfony\Component\HttpFoundation\Request;
+
+/**
+ * OpenId Provider
+ *
+ * @author Benjamin Lévêque <benjamin@leveque.me>
+ */
 abstract class OpenidProvider extends AbstractProvider
 {
     protected $openid;
@@ -7,9 +16,10 @@ abstract class OpenidProvider extends AbstractProvider
     /**
      * Prepare the openid request
      */
-    abstract function prepareRequest();
+    abstract protected function prepareRequest();
 
     /**
+     * Handle Request
      *
      * @param Request $request     the current request
      * @param string  $redirectUrl the url to redirect to
@@ -28,6 +38,8 @@ abstract class OpenidProvider extends AbstractProvider
     }
 
     /**
+     * Handle Response
+     *
      * @param Request $request     the current request
      * @param string  $redirectUrl the current url
      *
@@ -42,7 +54,7 @@ abstract class OpenidProvider extends AbstractProvider
             return false;
         }
 
-                    // echec de la connexion
+        // echec de la connexion
         if (false === $this->openid->validate()) {
             return false;
         }

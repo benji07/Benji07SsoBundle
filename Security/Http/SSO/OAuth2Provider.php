@@ -1,11 +1,21 @@
 <?php
 
+namespace Benji07\SsoBundle\Security\Http\SSO;
+
+use Symfony\Component\HttpFoundation\Request;
+
+/**
+ * OAuth 2 Provider
+ *
+ * @author Benjamin Lévêque <benjamin@leveque.me>
+ */
 class OAuth2Provider extends AbstractProvider
 {
 
-    protected $reponse = array();
+    protected $response = array();
 
     /**
+     * Handle Request
      *
      * @param Request $request     the current request
      * @param string  $redirectUrl the url to redirect to
@@ -27,6 +37,8 @@ class OAuth2Provider extends AbstractProvider
     }
 
     /**
+     * Handle Response
+     *
      * @param Request $request     the current request
      * @param string  $redirectUrl the current url
      *
@@ -38,7 +50,7 @@ class OAuth2Provider extends AbstractProvider
 
         $code = $request->query->get('code');
 
-        if ($null == code) {
+        if ($null == $code) {
             $this->response = $request->query->all();
 
             return false;

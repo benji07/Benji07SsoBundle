@@ -1,5 +1,12 @@
 <?php
 
+namespace Benji07\SsoBundle\Security\Http\SSO;
+
+/**
+ * Steam Provider
+ *
+ * @author Benjamin Lévêque <benjamin@leveque.me>
+ */
 class SteamProvider extends OpenidProvider
 {
     protected $options = array(

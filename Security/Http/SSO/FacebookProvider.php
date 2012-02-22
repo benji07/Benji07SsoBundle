@@ -1,5 +1,12 @@
 <?php
 
+namespace Benji07\SsoBundle\Security\Http\SSO;
+
+/**
+ * Facebook Provider
+ *
+ * @author Benjamin Lévêque <benjamin@leveque.me>
+ */
 class FacebookProvider extends OAuth2Provider
 {
     protected $options = array(

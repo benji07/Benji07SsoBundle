@@ -1,11 +1,18 @@
 <?php
 
+namespace Benji07\SsoBundle\Security\Http\SSO;
+
+use Symfony\Component\HttpFoundation\Request;
+
 /**
  * Interface for SSO Provider
+ *
+ * @author Benjamin Lévêque <benjamin@leveque.me>
  */
 interface ProviderInterface
 {
     /**
+     * Handle Request
      *
      * @param Request $request     the current request
      * @param string  $redirectUrl the url to redirect to
@@ -15,6 +22,8 @@ interface ProviderInterface
     function handleRequest(Request $request, $redirectUrl);
 
     /**
+     * Handle Response
+     *
      * @param Request $request     the current request
      * @param string  $redirectUrl the current url
      *
