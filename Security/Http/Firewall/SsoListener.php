@@ -4,7 +4,10 @@ namespace Benji07\SsoBundle\Security\Http\Firewal;
 
 use Symfony\Component\Security\Http\Firewall\AbstractAuthenticationListener,
     Symfony\Component\HttpFoundation\Request,
-    Symfony\Component\Security\Core\Exception\AuthenticationException;
+    Symfony\Component\Security\Core\Exception\AuthenticationException,
+    Symfony\Component\Security\Core\User\UserInterface;
+
+use Benji07\SsoBundle\Security\Core\Token\SsoToken;
 
 /**
  * SSO Listener
@@ -42,6 +45,8 @@ class SsoListener extends AbstractAuthenticationListener
     {
         $result = $provider->handleResponse($request);
 
+        $providerName = $provider->getName();
+
         if (false === $result) {
             // something went wrong
             throw new AuthenticationException('SSO Authentication failed.');
@@ -49,10 +54,10 @@ class SsoListener extends AbstractAuthenticationListener
 
         $userData = $provider->getUserData();
 
-        $user = $this->userManager->findUser($userData);
+        $user = $this->userManager->findUser($providerName, $userData);
 
         if (null === $user) {
-            $user = $this->userManager->createUser($userData);
+            $user = $this->userManager->createUser($providerName, $userData);
 
             if ($user instanceof Response || null === $user) {
                 return $user;

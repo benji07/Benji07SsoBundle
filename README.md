@@ -1,4 +1,6 @@
-Questions:
+# Questions:
+
+- Comment récupérer le provider actif dans le SSOListener
 - Comment récupérer l'id de l'utilisateur ? (dépend vraiment du provider, si oauth = token_access, sinon méthode a prévoir avec openid)
 - Comment récupérer les informations de l'utilisateur ? (via un service, puis ça dépends vraiment de ce que l'on a besoin)
 - Comment créer un utilisateur ?
@@ -23,6 +25,7 @@ Workflow OAuth (1 ou 2) et OpenId:
 Step 1: handleRequest
 - Comment lancer la redirection ?
 
+```yml
 benji07_sso:
     user_manager: benji07.sso.usermanager
     providers:
@@ -45,3 +48,4 @@ benji07_sso:
             service: benji07.sso.provider.steam
             options:
                 url: http://steamcommunity.com/openid
+```

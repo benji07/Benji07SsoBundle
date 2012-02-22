@@ -2,6 +2,8 @@
 
 namespace Benji07\SsoBundle\Security\Core\User;
 
+use Symfony\Component\Security\Core\User\UserInterface;
+
 /**
  * UserManager
  *
