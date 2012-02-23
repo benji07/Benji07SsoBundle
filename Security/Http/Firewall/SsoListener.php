@@ -9,6 +9,8 @@ use Symfony\Component\Security\Http\Firewall\AbstractAuthenticationListener,
 
 use Benji07\SsoBundle\Security\Core\Token\SsoToken;
 
+use Benji07\SsoBundle\Security\Http\SSO\Factory;
+
 /**
  * SSO Listener
  *
@@ -20,7 +22,12 @@ class SsoListener extends AbstractAuthenticationListener
     /**
      * @var UserManagerInterface
      */
-    protected $userManager;
+    private $userManager;
+
+    /**
+     * @var Factory
+     */
+    private $providerFactory;
 
     /**
      * Set user manager
@@ -30,6 +37,16 @@ class SsoListener extends AbstractAuthenticationListener
     public function setUserManager(UserManagerInterface $userManager)
     {
         $this->userManager = $userManager;
+    }
+
+    /**
+     * Set provider factory
+     *
+     * @param Factory $factory the provider factory
+     */
+    public function setProviderFactory(Factory $factory)
+    {
+        $this->providerFactory = $factory;
     }
 
     /**
@@ -43,9 +60,11 @@ class SsoListener extends AbstractAuthenticationListener
      */
     protected function attemptAuthentication(Request $request)
     {
-        $result = $provider->handleResponse($request);
+        $provider = $this->factory->get($name);
 
-        $providerName = $provider->getName();
+        $url = $this->httpUtils->createRequest($request, $this->options['check_path'])->getUri();
+
+        $result = $provider->handleResponse($request, $url);
 
         if (false === $result) {
             // something went wrong
@@ -54,10 +73,10 @@ class SsoListener extends AbstractAuthenticationListener
 
         $userData = $provider->getUserData();
 
-        $user = $this->userManager->findUser($providerName, $userData);
+        $user = $this->userManager->findUser($name, $userData);
 
         if (null === $user) {
-            $user = $this->userManager->createUser($providerName, $userData);
+            $user = $this->userManager->createUser($name, $userData);
 
             if ($user instanceof Response || null === $user) {
                 return $user;
