@@ -47,5 +47,5 @@ benji07_sso:
         steam:
             service: benji07.sso.provider.steam
             options:
-                url: http://steamcommunity.com/openid
+                apiKey: %steam_apiKey%
 ```

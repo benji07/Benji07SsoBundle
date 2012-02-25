@@ -1,6 +1,6 @@
 <?php
 
-namespace Benji07\SsoBundle\Security\Http\SSO;
+namespace Benji07\SsoBundle\Providers;
 
 /**
  * Steam Provider
@@ -10,7 +10,7 @@ namespace Benji07\SsoBundle\Security\Http\SSO;
 class SteamProvider extends OpenidProvider
 {
     protected $options = array(
-        'loginUrl' => 'http://steamcommunity.com/openid',
+        'loginUrl'   => 'http://steamcommunity.com/openid',
         'profileUrl' => 'http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/',
     );
 
@@ -37,7 +37,7 @@ class SteamProvider extends OpenidProvider
 
             $query = http_build_query(array(
                 'key' => $this->getOption('apiKey'),
-                'steamids' => $steamids
+                'steamids' => $steamId
             ));
 
             $url = $this->getOption('profileUrl') . '?' . $query;
@@ -45,7 +45,7 @@ class SteamProvider extends OpenidProvider
             $json = json_decode(file_get_contents($url));
 
             if (count($json->response->players)) {
-                $data = (array) $json->response->players[0]->player;
+                $data = (array) $json->response->players[0];
             }
         }
 

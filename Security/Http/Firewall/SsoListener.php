@@ -1,15 +1,17 @@
 <?php
 
-namespace Benji07\SsoBundle\Security\Http\Firewal;
+namespace Benji07\SsoBundle\Security\Http\Firewall;
 
 use Symfony\Component\Security\Http\Firewall\AbstractAuthenticationListener,
     Symfony\Component\HttpFoundation\Request,
     Symfony\Component\Security\Core\Exception\AuthenticationException,
     Symfony\Component\Security\Core\User\UserInterface;
 
+use Benji07\SsoBundle\Security\Core\User\UserManagerInterface;
+
 use Benji07\SsoBundle\Security\Core\Token\SsoToken;
 
-use Benji07\SsoBundle\Security\Http\SSO\Factory;
+use Benji07\SsoBundle\Providers\Factory;
 
 /**
  * SSO Listener
@@ -60,7 +62,13 @@ class SsoListener extends AbstractAuthenticationListener
      */
     protected function attemptAuthentication(Request $request)
     {
-        $provider = $this->factory->get($name);
+        $name = $request->getSession()->get('sso_provider');
+
+        if (null === $name) {
+            throw new AuthenticationException('SSO Authentication failed (no provider defined).');
+        }
+
+        $provider = $this->providerFactory->get($name);
 
         $url = $this->httpUtils->createRequest($request, $this->options['check_path'])->getUri();
 

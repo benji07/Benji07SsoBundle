@@ -9,7 +9,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
  *
  * @author Benjamin Lévêque <benjamin@leveque.me>
  */
-interface UserManager
+interface UserManagerInterface
 {
     /**
      * Trouve un utilisateur en fonction des informations renvoyé par le sso

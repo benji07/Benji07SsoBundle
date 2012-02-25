@@ -1,6 +1,6 @@
 <?php
 
-namespace Benji07\SsoBundle\Security\Http\SSO;
+namespace Benji07\SsoBundle\Providers;
 
 use Symfony\Component\HttpFoundation\Request;
 
@@ -34,7 +34,7 @@ abstract class OpenidProvider extends AbstractProvider
 
         $this->prepareRequest();
 
-        return $openid->authUrl();
+        return $this->openid->authUrl();
     }
 
     /**

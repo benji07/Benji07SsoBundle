@@ -23,6 +23,6 @@ class Benji07SsoBundle extends Bundle
         parent::build($container);
 
         $extension = $container->getExtension('security');
-        $extension->addSecurityListener(new SsoFactory);
+        $extension->addSecurityListenerFactory(new SsoFactory);
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Benji07\SsoBundle\Security\Http\SSO;
+namespace Benji07\SsoBundle\Providers;
 
 /**
  * Abstract Provider
@@ -10,7 +10,7 @@ namespace Benji07\SsoBundle\Security\Http\SSO;
 abstract class AbstractProvider implements ProviderInterface
 {
 
-    protected $options = array();;
+    protected $options = array();
 
     /**
      * __construct

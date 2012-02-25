@@ -1,6 +1,6 @@
 <?php
 
-namespace Benji07\SsoBundle\Security\Http\SSO;
+namespace Benji07\SsoBundle\Providers;
 
 /**
  * SSO Provider factory
@@ -31,7 +31,7 @@ class Factory
      */
     public function get($name)
     {
-        if (!array_key_exists($this->providers, $name)) {
+        if (!array_key_exists($name, $this->providers)) {
             throw new \InvalidArgumentException(sprintf('Unknown provider "%s"', $name));
         }
 

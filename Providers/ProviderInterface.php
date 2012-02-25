@@ -1,6 +1,6 @@
 <?php
 
-namespace Benji07\SsoBundle\Security\Http\SSO;
+namespace Benji07\SsoBundle\Providers;
 
 use Symfony\Component\HttpFoundation\Request;
 

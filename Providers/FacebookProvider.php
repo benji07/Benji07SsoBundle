@@ -1,6 +1,6 @@
 <?php
 
-namespace Benji07\SsoBundle\Security\Http\SSO;
+namespace Benji07\SsoBundle\Providers;
 
 /**
  * Facebook Provider
@@ -10,9 +10,9 @@ namespace Benji07\SsoBundle\Security\Http\SSO;
 class FacebookProvider extends OAuth2Provider
 {
     protected $options = array(
-        'authorizeUrl' => 'https://www.facebook.com/dialog/oauth',
+        'authorizeUrl'   => 'https://www.facebook.com/dialog/oauth',
         'accessTokenUrl' => 'https://graph.facebook.com/oauth/access_token',
-        'profileUrl' => 'https://graph.facebook.com/me'
+        'profileUrl'     => 'https://graph.facebook.com/me'
     );
 
     /**
