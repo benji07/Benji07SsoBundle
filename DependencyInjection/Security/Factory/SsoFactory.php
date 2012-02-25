@@ -4,6 +4,11 @@ namespace Benji07\SsoBundle\DependencyInjection\Security\Factory;
 
 use Symfony\Bundle\SecurityBundle\DependencyInjection\Security\Factory\AbstractFactory;
 
+/**
+ * Sso Factory
+ *
+ * @author Benjamin Lévêque <benjamin@leveque.me>
+ */
 class SsoFactory extends AbstractFactory
 {
     /**
