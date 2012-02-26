@@ -16,7 +16,7 @@ class SsoFactory extends AbstractFactory
     /**
      * Create the auth provider
      *
-     * @param ContainerBuilder $container
+     * @param ContainerBuilder $container      container
      * @param string           $id             The unique id of the firewall
      * @param array            $config         The options array for this listener
      * @param string           $userProviderId The id of the user provider
@@ -31,10 +31,10 @@ class SsoFactory extends AbstractFactory
     /**
      * Create an entry point
      *
-     * @param ContainerBuilder $container
-     * @param string $id
-     * @param array $config
-     * @param string $defaultEntryPointId
+     * @param ContainerBuilder $container           container
+     * @param string           $id                  id
+     * @param array            $config              config
+     * @param string           $defaultEntryPointId defaultEntryPointId
      *
      * @return string the entry point id
      */
@@ -50,16 +50,31 @@ class SsoFactory extends AbstractFactory
         return $entryPointId;
     }
 
+    /**
+     * Get Listener id
+     *
+     * @return string
+     */
     protected function getListenerId()
     {
         return 'benji07_sso.authentication.listener';
     }
 
+    /**
+     * Get Position
+     *
+     * @return string
+     */
     public function getPosition()
     {
         return 'http';
     }
 
+    /**
+     * Get Key
+     *
+     * @return string
+     */
     public function getKey()
     {
         return 'sso';

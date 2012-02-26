@@ -23,8 +23,23 @@ class SsoToken extends AbstractToken
         $this->setUser($user);
     }
 
+    /**
+     * Get the user credentials
+     *
+     * @return string
+     */
     public function getCredentials()
     {
         return $this->getUser()->getUsername();
+    }
+
+    /**
+     * Check if the user is authenticated
+     *
+     * @return boolean
+     */
+    public function isAuthenticated()
+    {
+        return count($this->getRoles()) > 0;
     }
 }

@@ -5,7 +5,7 @@ namespace Benji07\SsoBundle\Security\Core\Authentication\Provider;
 use Symfony\Component\Security\Core\Authentication\Provider\AuthenticationProviderInterface,
     Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 
-use Benji07\SsoBundle\Security\Core\Token\SsoToken;
+use Benji07\SsoBundle\Security\Core\Authentication\Token\SsoToken;
 
 /**
  * Sso Provider
@@ -35,8 +35,6 @@ class SsoProvider implements AuthenticationProviderInterface
      */
     public function authenticate(TokenInterface $token)
     {
-        $token->setAuthenticate(true);
-
         return $token;
     }
 }

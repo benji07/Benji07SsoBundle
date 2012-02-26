@@ -8,8 +8,17 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\Reference;
 
+/**
+ * Benji07 SSO Extension
+ */
 class Benji07SsoExtension extends Extension
 {
+    /**
+     * Load this extension
+     *
+     * @param array            $configs   configs
+     * @param ContainerBuilder $container container
+     */
     public function load(array $configs, ContainerBuilder $container)
     {
         $configuration = new Configuration();
@@ -33,6 +42,11 @@ class Benji07SsoExtension extends Extension
         $definition->addMethodCall('setUserManager', array(new Reference($config['user_manager'])));
     }
 
+    /**
+     * Get Alias
+     *
+     * @return string
+     */
     public function getAlias()
     {
         return 'benji07_sso';

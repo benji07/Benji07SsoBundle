@@ -44,11 +44,3 @@ class Configuration implements ConfigurationInterface
         return $treeBuilder;
     }
 }
-
-
-#providers:
-    #twitter:
-        #service: benji07.sso.provider.twitter
-        #options:
-            #clientId: %twitter_clientId%
-            #secretId: %twitter_secretId%

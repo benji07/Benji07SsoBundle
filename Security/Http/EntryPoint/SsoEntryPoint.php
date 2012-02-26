@@ -9,6 +9,11 @@ use Symfony\Component\Security\Http\EntryPoint\AuthenticationEntryPointInterface
 
 use Benji07\SsoBundle\Providers\Factory;
 
+/**
+ * Sso EntryPoint
+ *
+ * @author Benjamin Lévêque <benjamin@leveque.me>
+ */
 class SsoEntryPoint implements AuthenticationEntryPointInterface
 {
 
@@ -20,6 +25,14 @@ class SsoEntryPoint implements AuthenticationEntryPointInterface
 
     protected $loginPath;
 
+    /**
+     * __construct
+     *
+     * @param HttpUtils $httpUtils    httpUtils
+     * @param Factory   $ssoProviders ssoProviders
+     * @param string    $checkPath    checkPath
+     * @param string    $loginPath    loginPath
+     */
     public function __construct(HttpUtils $httpUtils, Factory $ssoProviders, $checkPath, $loginPath)
     {
         $this->httpUtils = $httpUtils;
@@ -45,15 +58,18 @@ class SsoEntryPoint implements AuthenticationEntryPointInterface
 
             $providerName = $request->query->get('provider');
 
-            $request->getSession()->set('sso_provider', $providerName);
+            if ($providerName) {
 
-            $provider = $this->ssoProviders->get($providerName);
+                $request->getSession()->set('sso_provider', $providerName);
 
-            $checkPathUrl = $this->httpUtils->createRequest($request, $this->checkPath)->getUri();
+                $provider = $this->ssoProviders->get($providerName);
 
-            $redirectUrl = $provider->handleRequest($request, $checkPathUrl);
+                $checkPathUrl = $this->httpUtils->createRequest($request, $this->checkPath)->getUri();
 
-            return $this->httpUtils->createRedirectResponse($request, $redirectUrl);
+                $redirectUrl = $provider->handleRequest($request, $checkPathUrl);
+
+                return $this->httpUtils->createRedirectResponse($request, $redirectUrl);
+            }
         }
 
         throw $authException;
