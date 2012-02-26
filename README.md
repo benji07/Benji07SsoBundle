@@ -1,3 +1,25 @@
+# Installation
+
+# Configuration
+
+    [yml]
+    # security.yml
+    firewalls:
+        sso:
+            pattern: ^/sso/login/
+            security: false
+        main:
+            sso:
+                check_path: /sso/login_check
+
+# Built-in provider
+
+- Steam
+- ...
+
+
+
+
 # Questions:
 
 - Comment récupérer le provider actif dans le SSOListener

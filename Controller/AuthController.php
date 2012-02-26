@@ -16,11 +16,11 @@ class AuthController extends Controller
      */
     public function loginAction($name)
     {
-        $provider = $this->get('benji07_sso.provider.factory')->get($name)
+        $provider = $this->get('benji07_sso.provider.factory')->get($name);
 
         $this->getRequest()->getSession()->set('sso_provider', $name);
 
-        $redirectUrl = $this->generateUrl('_sso_check_path', array(), true);
+        $redirectUrl = $this->generateUrl('_sso_login_check', array(), true);
 
         $url = $provider->handleRequest($this->getRequest(), $redirectUrl);
 
