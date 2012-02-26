@@ -29,28 +29,6 @@ class SsoFactory extends AbstractFactory
     }
 
     /**
-     * Create an entry point
-     *
-     * @param ContainerBuilder $container           container
-     * @param string           $id                  id
-     * @param array            $config              config
-     * @param string           $defaultEntryPointId defaultEntryPointId
-     *
-     * @return string the entry point id
-     */
-    protected function createEntryPoint($container, $id, $config, $defaultEntryPointId)
-    {
-        $entryPointId = 'benji07_sso.authentication.entry_point.concrete';
-
-        $container
-            ->setDefinition($entryPointId, new DefinitionDecorator('benji07_sso.authentication.entry_point'))
-            ->replaceArgument(2, $config['check_path'])
-            ->replaceArgument(3, $config['login_path']);
-
-        return $entryPointId;
-    }
-
-    /**
      * Get Listener id
      *
      * @return string

@@ -1,0 +1,7 @@
+_sso_login:
+    pattern: /sso/login/:name
+    defaults: { _controller: Benji07SsoBundle:Auth:login}
+
+_sso_login_check:
+    pattern: /sso/login_check
+    defaults: { _controller: Benji07SsoBundle:Auth:loginCheck}

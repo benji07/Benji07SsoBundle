@@ -14,12 +14,6 @@
     <services>
         <service id="benji07_sso.authentication.listener" class="%benji07_sso.authentication.listener.class%" parent="security.authentication.listener.abstract"/>
         <service id="benji07_sso.authentication.provider" class="%benji07_sso.authentication.provider.class%" />
-        <service id="benji07_sso.authentication.entry_point" class="%benji07_sso.authentication.entry_point.class%">
-            <argument type="service" id="security.http_utils" />
-            <argument type="service" id="benji07_sso.provider.factory" />
-            <argument />
-            <argument />
-        </service>
         <service id="benji07_sso.provider.factory" class="%benji07_sso.provider.factory.class%" />
     </services>
 
