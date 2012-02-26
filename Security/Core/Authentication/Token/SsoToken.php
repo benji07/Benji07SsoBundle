@@ -1,6 +1,6 @@
 <?php
 
-namespace Benji07\SsoBundle\Security\Core\Token;
+namespace Benji07\SsoBundle\Security\Core\Authentication\Token;
 
 use Symfony\Component\Security\Core\Authentication\Token\AbstractToken;
 
@@ -21,5 +21,10 @@ class SsoToken extends AbstractToken
         parent::__construct($user->getRoles());
 
         $this->setUser($user);
+    }
+
+    public function getCredentials()
+    {
+        return $this->getUser()->getUsername();
     }
 }

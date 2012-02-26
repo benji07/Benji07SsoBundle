@@ -9,7 +9,7 @@ use Symfony\Component\Security\Http\Firewall\AbstractAuthenticationListener,
 
 use Benji07\SsoBundle\Security\Core\User\UserManagerInterface;
 
-use Benji07\SsoBundle\Security\Core\Token\SsoToken;
+use Benji07\SsoBundle\Security\Core\Authentication\Token\SsoToken;
 
 use Benji07\SsoBundle\Providers\Factory;
 
