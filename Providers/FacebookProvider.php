@@ -12,7 +12,8 @@ class FacebookProvider extends OAuth2Provider
     protected $options = array(
         'authorizeUrl'   => 'https://www.facebook.com/dialog/oauth',
         'accessTokenUrl' => 'https://graph.facebook.com/oauth/access_token',
-        'profileUrl'     => 'https://graph.facebook.com/me'
+        'profileUrl'     => 'https://graph.facebook.com/me',
+        'scope'          => ''
     );
 
     /**

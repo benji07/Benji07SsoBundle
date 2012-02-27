@@ -7,6 +7,7 @@
     <parameters>
         <parameter key="benji07_sso.provider.steam.class">Benji07\SsoBundle\Providers\SteamProvider</parameter>
         <parameter key="benji07_sso.provider.github.class">Benji07\SsoBundle\Providers\GithubProvider</parameter>
+        <parameter key="benji07_sso.provider.facebook.class">Benji07\SsoBundle\Providers\FacebookProvider</parameter>
     </parameters>
 
     <services>
@@ -15,6 +16,10 @@
         </service>
 
         <service id="benji07_sso.provider.github" class="%benji07_sso.provider.github.class%">
+            <argument type="collection"></argument>
+        </service>
+
+        <service id="benji07_sso.provider.facebook" class="%benji07_sso.provider.facebook.class%">
             <argument type="collection"></argument>
         </service>
     </services>
