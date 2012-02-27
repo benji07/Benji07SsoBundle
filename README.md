@@ -73,4 +73,6 @@ There is a few provider defined by default, but if you need you could extends OA
 
 # Add a link to login
 
+```jinja
 <a href="{{ path('_sso_login', {name: 'steam'}) }}">Login with steam</a>
+```
