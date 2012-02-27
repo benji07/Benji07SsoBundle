@@ -50,7 +50,7 @@ class OAuth2Provider extends AbstractProvider
 
         $code = $request->query->get('code');
 
-        if ($null == $code) {
+        if (null == $code) {
             $this->response = $request->query->all();
 
             return false;
@@ -58,7 +58,7 @@ class OAuth2Provider extends AbstractProvider
 
         $parameters = array(
             'client_id' => $this->getOption('clientId'),
-            'redirect_uri' => $redirectUri,
+            'redirect_uri' => $redirectUrl,
             'client_secret' => $this->getOption('secretId'),
             'code' => $code
         );
@@ -69,7 +69,7 @@ class OAuth2Provider extends AbstractProvider
 
         $this->response = $data;
 
-        if ($isset($data['error'])) {
+        if (isset($data['error'])) {
             return false;
         }
 

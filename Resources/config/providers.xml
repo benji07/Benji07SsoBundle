@@ -6,10 +6,15 @@
 
     <parameters>
         <parameter key="benji07_sso.provider.steam.class">Benji07\SsoBundle\Providers\SteamProvider</parameter>
+        <parameter key="benji07_sso.provider.github.class">Benji07\SsoBundle\Providers\GithubProvider</parameter>
     </parameters>
 
     <services>
         <service id="benji07_sso.provider.steam" class="%benji07_sso.provider.steam.class%">
+            <argument type="collection"></argument>
+        </service>
+
+        <service id="benji07_sso.provider.github" class="%benji07_sso.provider.github.class%">
             <argument type="collection"></argument>
         </service>
     </services>
