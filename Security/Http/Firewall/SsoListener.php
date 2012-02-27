@@ -81,6 +81,8 @@ class SsoListener extends AbstractAuthenticationListener
 
         $userData = $provider->getUserData();
 
+        $request->getSession()->set('sso_user', $userData);
+
         $user = $this->userManager->findUser($name, $userData);
 
         if (null === $user) {

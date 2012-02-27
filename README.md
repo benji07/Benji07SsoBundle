@@ -1,73 +1,76 @@
 # Installation
 
-# Configuration
+## Step 1: Download the bundle using composer
 
-    [yml]
-    # security.yml
-    firewalls:
+```json
+"require": {
+    "benji07/sso-bundle": "*"
+}
+```
+
+## Alternative Step 1: Download the bundle using the vendors script
+
+```
+[Buzz]
+    git=https://github.com/kriswallsmith/Buzz.git
+    version=v0.5
+
+[BuzzBundle]
+    git=https://github.com/sensio/SensioBuzzBundle.git
+    target=/bundles/Sensio/Bundle/BuzzBundle
+
+[LightOpenId]
+    git=git://gitorious.org/lightopenid/lightopenid.git
+    target=/lightopenid
+
+
+[Benji07SSoBundle]
+    git=https://github.com/benji07/Benji07SsoBundle.git
+    target=/bundles/Benji07/SsoBundle
+```
+
+## Step 2: Routing Configuration
+
+```
+Benji07SsoBundle:
+    resource: "@Benji07SsoBundle/Resources/config/routing.yml"
+```
+
+## Step 3: Security Configuration
+
+```yml
+firewalls:
+    sso:
+        pattern: ^/sso/login/
+        security: false
+    main:
         sso:
-            pattern: ^/sso/login/
-            security: false
-        main:
-            sso:
-                check_path: /sso/login_check
+            check_path: /sso/login_check
+```
 
-# Built-in provider
-
-- Steam
-- ...
-
-
-
-
-# Questions:
-
-- Comment récupérer le provider actif dans le SSOListener
-- Comment récupérer l'id de l'utilisateur ? (dépend vraiment du provider, si oauth = token_access, sinon méthode a prévoir avec openid)
-- Comment récupérer les informations de l'utilisateur ? (via un service, puis ça dépends vraiment de ce que l'on a besoin)
-- Comment créer un utilisateur ?
-    - via un service -> marche bien si on a pas besoin d'autre champ
-    - redirection sur l'inscription via une url (avec les données de l'openid en session)
-- Comment on récupère les informations de l'utilisateurs pour tous ces providers ? (oauth2, oauth1, openid)
-    -> dépends vraiment de l'api qui va avec le site
-
-- Création du compte d'un utilisateur:
-    - 2 cas (création automatique, ou renseignement de champ suplémentaire)
-
-
----------------------
-
-Workflow OAuth (1 ou 2) et OpenId:
-    - request -> redirection vers une url
-    - response -> récupération d'info dans la request
-
-
-
-
-Step 1: handleRequest
-- Comment lancer la redirection ?
+## Step 4: Application configuration
 
 ```yml
 benji07_sso:
-    user_manager: benji07.sso.usermanager
+    user_manager: your_user_manager.id
     providers:
-        twitter:
-            service: benji07.sso.provider.twitter
-            options:
-                clientId: %twitter_clientId%
-                secretId: %twitter_secretId%
-        facebook:
-            service: benji07.sso.provider.facebook
-            options:
-                clientId: %twitter_clientId%
-                secretId: %twitter_secretId%
-        github:
-            service: benji07.sso.provider.github
-            options:
-                clientId: %github_clientId%
-                secretId: %github_secreitId%
         steam:
             service: benji07.sso.provider.steam
             options:
                 apiKey: %steam_apiKey%
 ```
+
+## Step 5: Create an user manager
+
+Create a class that implements UserManagerInterface and declare it as a service
+
+- findUser: find a user using the provider name and informations send by the provider
+- createUser: create a user or return a response to handle the user registration on a different way (providers data is set in session on sso_user)
+
+# Create new provider
+
+There is a few provider defined by default, but if you need you could extends OAuth or OpenId providers or implements the ProviderInterface
+
+# Add a link to login
+
+<a href="{{ path('_sso_login', {name: 'steam'}) }}">Login with steam</a>

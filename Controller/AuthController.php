@@ -12,6 +12,8 @@ class AuthController extends Controller
     /**
      * Login with SSO
      *
+     * @param string $name the provider name
+     *
      * @return RedirectResponse
      */
     public function loginAction($name)
@@ -32,6 +34,6 @@ class AuthController extends Controller
      */
     public function loginCheckAction()
     {
-
+        throw new \RuntimeException('You must configure the check path to be handled by the firewall.');
     }
 }
