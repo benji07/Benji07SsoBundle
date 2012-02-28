@@ -4,14 +4,13 @@ namespace Benji07\SsoBundle\Security\Http\Firewall;
 
 use Symfony\Component\Security\Http\Firewall\AbstractAuthenticationListener,
     Symfony\Component\HttpFoundation\Request,
+    Symfony\Component\HttpFoundation\Response,
     Symfony\Component\Security\Core\Exception\AuthenticationException,
     Symfony\Component\Security\Core\User\UserInterface;
 
-use Benji07\SsoBundle\Security\Core\User\UserManagerInterface;
-
-use Benji07\SsoBundle\Security\Core\Authentication\Token\SsoToken;
-
-use Benji07\SsoBundle\Providers\Factory;
+use Benji07\SsoBundle\Security\Core\User\UserManagerInterface,
+    Benji07\SsoBundle\Security\Core\Authentication\Token\SsoToken,
+    Benji07\SsoBundle\Providers\Factory;
 
 /**
  * SSO Listener
