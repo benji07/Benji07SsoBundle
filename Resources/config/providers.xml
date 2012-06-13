@@ -8,6 +8,8 @@
         <parameter key="benji07_sso.provider.steam.class">Benji07\SsoBundle\Providers\SteamProvider</parameter>
         <parameter key="benji07_sso.provider.github.class">Benji07\SsoBundle\Providers\GithubProvider</parameter>
         <parameter key="benji07_sso.provider.facebook.class">Benji07\SsoBundle\Providers\FacebookProvider</parameter>
+        <parameter key="benji07_sso.provider.oauth1.class">Benji07\SsoBundle\Providers\OAuth1aProvider</parameter>
+        <parameter key="benji07_sso.provider.twitter.class">Benji07\SsoBundle\Providers\TwitterProvider</parameter>
     </parameters>
 
     <services>
@@ -21,6 +23,14 @@
 
         <service id="benji07_sso.provider.facebook" class="%benji07_sso.provider.facebook.class%">
             <argument type="collection"></argument>
+        </service>
+
+        <service id="benji07_sso.provider.oauth1" class="%benji07_sso.provider.oauth1.class" abstract="true">
+            <argument type="collection"></argument>
+            <argument type="service" id="buzz" on-invalid="null" />
+        </service>
+
+        <service id="benji07_sso.provider.twitter" class="%benji07_sso.provider.twitter.class%" parent="benji07_sso.provider.oauth1">
         </service>
     </services>
 
