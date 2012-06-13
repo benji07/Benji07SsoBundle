@@ -5,3 +5,15 @@ _sso_login:
 _sso_login_check:
     pattern: /sso/login_check
     defaults: { _controller: Benji07SsoBundle:Auth:loginCheck}
+
+_sso_link:
+    pattern: /sso/link/{name}
+    defaults: { _controller: Benji07SsoBundle:Auth:link}
+
+_sso_link_callback:
+    pattern: /sso/link/{name}/callback
+    defaults: { _controller: Benji07SsoBundle:Auth:linkCallback}
+
+_sso_unlink:
+    pattern: /sso/unlink/{name}
+    defaults: { _controller: Benji07SsoBundle:Auth:unlink}

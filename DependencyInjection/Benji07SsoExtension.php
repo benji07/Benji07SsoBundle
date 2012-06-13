@@ -36,10 +36,11 @@ class Benji07SsoExtension extends Extension
             $definition->addMethodCall('add', array($name, new Reference($provider['service'])));
         }
 
+        $definition->replaceArgument(0, new Reference($config['user_manager']));
+
         $definition = $container->getDefinition('benji07_sso.authentication.listener');
 
         $definition->addMethodCall('setProviderFactory', array(new Reference('benji07_sso.provider.factory')));
-        $definition->addMethodCall('setUserManager', array(new Reference($config['user_manager'])));
     }
 
     /**

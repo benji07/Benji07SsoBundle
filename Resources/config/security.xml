@@ -14,7 +14,9 @@
     <services>
         <service id="benji07_sso.authentication.listener" class="%benji07_sso.authentication.listener.class%" parent="security.authentication.listener.abstract"/>
         <service id="benji07_sso.authentication.provider" class="%benji07_sso.authentication.provider.class%" />
-        <service id="benji07_sso.provider.factory" class="%benji07_sso.provider.factory.class%" />
+        <service id="benji07_sso.provider.factory" class="%benji07_sso.provider.factory.class%">
+            <argument /> <!-- user manager -->
+        </service>
     </services>
 
 </container>

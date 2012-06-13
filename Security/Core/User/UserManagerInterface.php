@@ -30,4 +30,21 @@ interface UserManagerInterface
      * @return UserInterface | Response
      */
     function createUser($providerName, array $userInfos = array());
+
+    /**
+     * Lie un utilisateur a un provider
+     *
+     * @param  UserInterface $user         the user
+     * @param  string        $providerName the provider name
+     * @param  array         $userInfos    user informations
+     */
+    function linkUser(UserInterface $user, $providerName, $userInfos);
+
+    /**
+     * Supprime le lien a un provider
+     *
+     * @param  UserInterface $user         the user
+     * @param  string        $providerName the provider name
+     */
+    function unlinkUser(UserInterface $user, $providerName);
 }

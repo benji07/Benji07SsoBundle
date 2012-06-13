@@ -19,26 +19,10 @@ use Benji07\SsoBundle\Security\Core\User\UserManagerInterface,
  */
 class SsoListener extends AbstractAuthenticationListener
 {
-
-    /**
-     * @var UserManagerInterface
-     */
-    private $userManager;
-
     /**
      * @var Factory
      */
     private $providerFactory;
-
-    /**
-     * Set user manager
-     *
-     * @param UserManagerInterface $userManager the user manager
-     */
-    public function setUserManager(UserManagerInterface $userManager)
-    {
-        $this->userManager = $userManager;
-    }
 
     /**
      * Set provider factory
@@ -82,10 +66,10 @@ class SsoListener extends AbstractAuthenticationListener
 
         $request->getSession()->set('sso_user', $userData);
 
-        $user = $this->userManager->findUser($name, $userData);
+        $user = $this->providerFactory->getUserManager()->findUser($name, $userData);
 
         if (null === $user) {
-            $user = $this->userManager->createUser($name, $userData);
+            $user = $this->providerFactory->getUserManager()->createUser($name, $userData);
 
             if ($user instanceof Response || null === $user) {
                 return $user;

@@ -9,6 +9,28 @@ class Factory
 {
     private $providers = array();
 
+    private $userManager;
+
+    /**
+     * __construct
+     *
+     * @param UserManagerInterface $userManager
+     */
+    public function __construct($userManager)
+    {
+        $this->userManager = $userManager;
+    }
+
+    /**
+     * Get Usermanager
+     *
+     * @return UserManagerInterface
+     */
+    public function getUserManager()
+    {
+        return $this->userManager;
+    }
+
     /**
      * Add a provider
      *
