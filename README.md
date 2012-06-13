@@ -1,78 +1,103 @@
-# Installation
+# Benji07SsoBundle
 
-## Step 1: Download the bundle using composer
+## Installation
 
-```json
-"require": {
-    "benji07/sso-bundle": "*"
-}
-```
+### Installation for OAuth2 (facebook, github, ...)
 
-## Alternative Step 1: Download the bundle using the vendors script
+    # composer.json
+    {
+        "require": {
+            "benji07/sso-bundle": "dev-develop"
+        }
+    }
 
-```
-[Buzz]
-    git=https://github.com/kriswallsmith/Buzz.git
-    version=v0.5
+### Installation for OAuth 1.0a (twitter)
 
-[BuzzBundle]
-    git=https://github.com/sensio/SensioBuzzBundle.git
-    target=/bundles/Sensio/Bundle/BuzzBundle
+    # composer.json
+    {
+        "autoload": {
+            "classmap": ["vendor/oauth/oauth"]
+        },
+        "repositories": [
+            {
+                "type": "package",
+                "package": {
+                    "name": "oauth/oauth",
+                    "version": 1,
+                    "source": {
+                        "url": "http://oauth.googlecode.com/svn/",
+                        "type": "svn",
+                        "reference": "code/php"
+                    }
+                }
+            }
+        ],
+        "require": {
+            "oauth/oauth": 1,
+            "sensio/buzz-bundle": "*",
+            "benji07/sso-bundle": "dev-develop"
+        }
+    }
 
-[LightOpenId]
-    git=git://gitorious.org/lightopenid/lightopenid.git
-    target=/lightopenid
+### Installation for OpenId (only steam is currently supported)
+
+    # composer.json
+    {
+        "require": {
+            "fp/lightopenid": "dev-master",
+            "benji07/sso-bundle": "dev-develop"
+        }
+    }
 
 
-[Benji07SSoBundle]
-    git=https://github.com/benji07/Benji07SsoBundle.git
-    target=/bundles/Benji07/SsoBundle
-```
+## Configuration
 
-## Step 2: Routing Configuration
+    # AppKernel.php:registerBundles()
+    $bundles[] = new Benji07\SsoBundle\Benji07SsoBundle();
 
-```
-Benji07SsoBundle:
-    resource: "@Benji07SsoBundle/Resources/config/routing.yml"
-```
+    # routing.yml
+    _sso:
+        resource: "@Benji07SsoBundle/Resources/config/routing.yml"
 
-## Step 3: Security Configuration
+    # app.yml
+    benji07_sso:
+        user_manager: acme.sso.user_manager
+        providers:
+            facebook:
+                service: benji07_sso.provider.facebook
+                options:
+                    clientId: %fb_clientId%
+                    secretId: %fb_secretId%
+                    scope:  %fb_scope%
+            twitter:
+                service: benji07_sso.provider.twitter
+                options:
+                    clientId: %twitter_clientId%
+                    secretId: %twitter_secretId%
 
-```yml
-firewalls:
-    sso:
-        pattern: ^/sso/login/
-        security: false
-    main:
+    # security.yml
+    firewalls:
         sso:
-            check_path: /sso/login_check
-```
+            pattern: ^/sso/login/
+            security: false
 
-## Step 4: Application configuration
+## Find / Create user
 
-```yml
-benji07_sso:
-    user_manager: your_user_manager.id
-    providers:
-        steam:
-            service: benji07.sso.provider.steam
-            options:
-                apiKey: %steam_apiKey%
-```
+You must create an UserManager that implements Benji07\SsoBundle\Security\Core\User\UserManagerInterface
 
-## Step 5: Create an user manager
+- findUser must return a UserInterface or null if the user doesn't exist
+- createUser must return a user if the user is created, a RedirectResponse if we can't automaticaly create the user or null
+- linkUser link the  user with the provider
+- unlinkUser unlink the user with the provider
 
-Create a class that implements UserManagerInterface and declare it as a service
+If we return a RedirectResponse inside the create user, we can find the user informations inside the session (with sso_user key).
 
-- findUser: find a user using the provider name and informations send by the provider
-- createUser: create a user or return a response to handle the user registration on a different way (providers data is set in session on sso_user)
+## Link to login, link and unlink
 
-# Create new provider
+- _sso_login -> start the authentication process for a given provider
+- _sso_link -> link the current user to a provider
+- _sso_unlink -> unlink the current user to the provider
 
-There is a few provider defined by default, but if you need you could extends OAuth or OpenId providers or implements the ProviderInterface
+# Add new Provider
 
-# Add a link to login
-
-```jinja
-<a href="{{ path('_sso_login', {name: 'steam'}) }}">Login with steam</a>
-```
+You can find examples for OAuth1 and OAuth2 inside TwitterProvider and FacebookProvider
