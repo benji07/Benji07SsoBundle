@@ -7,7 +7,7 @@ namespace Benji07\SsoBundle\Providers;
  *
  * @author Benjamin Lévêque <benjamin@leveque.me>
  */
-class TwitterProvider extends OAuth1Provider
+class TwitterProvider extends OAuth1aProvider
 {
     protected $options = array(
         'requestTokenUrl' => 'https://api.twitter.com/oauth/request_token',
@@ -25,9 +25,11 @@ class TwitterProvider extends OAuth1Provider
     {
         $data = parent::getUserData();
 
-        if (isset($data['access_token'])) {
+        if (isset($data['oauth_token'])) {
 
-            return array_merge($data, (array) $response);
+            $response = $this->get($this->getOption('profileUrl'), array(), array('oauth_token' => $data['oauth_token'], 'oauth_token_secret' => $data['oauth_token_secret']));
+
+            return array_merge($data, (array) json_decode($response));
         }
 
         return $data;

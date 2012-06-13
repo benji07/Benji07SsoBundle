@@ -21,6 +21,10 @@ class OAuth1aProvider extends AbstractProvider
         parent::__construct($options);
 
         $this->browser = $browser;
+
+        if ($this->browser) {
+            $this->browser->getClient()->setVerifyPeer(false);
+        }
     }
 
     /**
@@ -60,7 +64,7 @@ class OAuth1aProvider extends AbstractProvider
             return false;
         }
 
-        $token = $request->getSession()->get('oauth.'.$this->getName().'.token', array());
+        $token = $request->getSession()->get('oauth.' . get_class($this), array());
         $verifier = $request->query->get('oauth_verifier');
 
         $result = $this->post($this->getOption('accessTokenUrl'), array('oauth_verifier' => $verifier), $token);
@@ -94,7 +98,7 @@ class OAuth1aProvider extends AbstractProvider
     {
         $request = $this->prepareRequest($url, 'GET', $params, $token);
 
-        $response = $this->browser->get($request->getUrl());
+        $response = $this->browser->get($request->to_url());
 
         return $response->getContent();
     }
@@ -112,7 +116,7 @@ class OAuth1aProvider extends AbstractProvider
     {
         $request = $this->prepareRequest($url, 'POST', $params, $token);
 
-        $response = $this->browser->post($request->getNormalizedHttpUrl(), array(), $request->toPostdata());
+        $response = $this->browser->post($request->get_normalized_http_url(), array(), $request->to_postdata());
 
         return $response->getContent();
     }
@@ -135,9 +139,9 @@ class OAuth1aProvider extends AbstractProvider
             $token = new \OAuthToken($token['oauth_token'], $token['oauth_token_secret']);
         }
 
-        $request = \OAuthRequest::fromConsumerAndToken($consumer, $token, $method, $url, $params);
+        $request = \OAuthRequest::from_consumer_and_token($consumer, $token, $method, $url, $params);
 
-        $request->signRequest(new \OAuthSignatureMethod_HMAC_SHA1(), $consumer, $token);
+        $request->sign_request(new \OAuthSignatureMethod_HMAC_SHA1(), $consumer, $token);
 
         return $request;
     }
