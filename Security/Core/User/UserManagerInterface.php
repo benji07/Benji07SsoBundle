@@ -37,6 +37,8 @@ interface UserManagerInterface
      * @param  UserInterface $user         the user
      * @param  string        $providerName the provider name
      * @param  array         $userInfos    user informations
+     *
+     * @return boolean if link is successful
      */
     function linkUser(UserInterface $user, $providerName, $userInfos);
 
@@ -45,6 +47,8 @@ interface UserManagerInterface
      *
      * @param  UserInterface $user         the user
      * @param  string        $providerName the provider name
+     *
+     * @return boolean if unlink is successful
      */
     function unlinkUser(UserInterface $user, $providerName);
 }

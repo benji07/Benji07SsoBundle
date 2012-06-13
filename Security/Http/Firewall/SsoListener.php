@@ -71,8 +71,10 @@ class SsoListener extends AbstractAuthenticationListener
         if (null === $user) {
             $user = $this->providerFactory->getUserManager()->createUser($name, $userData);
 
-            if ($user instanceof Response || null === $user) {
+            if ($user instanceof Response) {
                 return $user;
+            } else if ($use === null) {
+                throw new AuthenticationException('sso.login.'.$name.'.fail');
             }
         }
 
