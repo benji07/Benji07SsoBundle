@@ -13,8 +13,11 @@
     "require": {
         "php": ">=5.3.2",
         "symfony/framework-bundle": "2.1.*",
-        "sensio/buzz-bundle": "*",
-        "fp/lightopenid": "dev-master"
+    },
+
+    "suggesst": {
+        "sensio/buzz-bundle": "For OAUth1.0a support",
+        "fp/lightopenid": "For Openid support"
     },
 
     "autoload": {
