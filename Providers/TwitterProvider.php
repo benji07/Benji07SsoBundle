@@ -11,7 +11,7 @@ class TwitterProvider extends OAuth1aProvider
 {
     protected $options = array(
         'requestTokenUrl' => 'https://api.twitter.com/oauth/request_token',
-        'authorizeUrl'    => 'https://api.twitter.com/oauth/authorize',
+        'authorizeUrl'    => 'https://api.twitter.com/oauth/authenticate',
         'accessTokenUrl'  => 'https://api.twitter.com/oauth/access_token',
         'profileUrl'      => 'http://api.twitter.com/1/account/verify_credentials.json',
     );

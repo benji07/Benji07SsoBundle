@@ -64,7 +64,7 @@ class SsoListener extends AbstractAuthenticationListener
         $name = $request->getSession()->get('sso_provider');
 
         if (null === $name) {
-            throw new AuthenticationException('SSO Authentication failed (no provider defined).');
+            throw new AuthenticationException('sso.login.unknown.fail');
         }
 
         $provider = $this->providerFactory->get($name);
@@ -75,7 +75,7 @@ class SsoListener extends AbstractAuthenticationListener
 
         if (false === $result) {
             // something went wrong
-            throw new AuthenticationException('SSO Authentication failed.');
+            throw new AuthenticationException('sso.login.'.$name.'.fail');
         }
 
         $userData = $provider->getUserData();

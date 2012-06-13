@@ -58,7 +58,7 @@ class OAuth1aProvider extends AbstractProvider
      */
     public function handleResponse(Request $request, $redirectUrl)
     {
-        if ($request->query->has('oauth_problem')) {
+        if ($request->query->has('oauth_problem') || $request->query->has('oauth_verifier') == false) {
             $this->response = $request->query->all();
 
             return false;
