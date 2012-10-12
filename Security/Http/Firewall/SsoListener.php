@@ -73,7 +73,7 @@ class SsoListener extends AbstractAuthenticationListener
 
             if ($user instanceof Response) {
                 return $user;
-            } else if ($use === null) {
+            } else if ($user === null) {
                 throw new AuthenticationException('sso.login.'.$name.'.fail');
             }
         }
