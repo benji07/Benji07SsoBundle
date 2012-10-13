@@ -39,7 +39,7 @@
         }
     }
 
-### Installation for OpenId (only steam is currently supported)
+### Installation for OpenId (google apps domain and steam)
 
     # composer.json
     {
