@@ -29,3 +29,12 @@ benji07_sso:
             options:
                 clientId: %twitter_key%
                 secretId: %twitter_secret%
+
+
+# Google Apps provider
+
+    providers:
+        google_apps:
+            service: benji07_sso.provider.google_apps
+            options:
+                domain: %google_apps_domain%

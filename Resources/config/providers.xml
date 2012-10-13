@@ -10,6 +10,7 @@
         <parameter key="benji07_sso.provider.facebook.class">Benji07\SsoBundle\Providers\FacebookProvider</parameter>
         <parameter key="benji07_sso.provider.oauth1.class">Benji07\SsoBundle\Providers\OAuth1aProvider</parameter>
         <parameter key="benji07_sso.provider.twitter.class">Benji07\SsoBundle\Providers\TwitterProvider</parameter>
+        <parameter key="benji07_sso.provider.google_apps.class">Benji07\SsoBundle\Providers\GoogleAppsProvider</parameter>
     </parameters>
 
     <services>
@@ -31,6 +32,10 @@
         </service>
 
         <service id="benji07_sso.provider.twitter" class="%benji07_sso.provider.twitter.class%" parent="benji07_sso.provider.oauth1">
+        </service>
+
+        <service id="benji07_sso.provider.google_apps" class="%benji07_sso.provider.google_apps.class%">
+            <argument type="collection"></argument>
         </service>
     </services>
 
