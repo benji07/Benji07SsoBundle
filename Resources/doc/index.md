@@ -7,6 +7,7 @@
     # composer.json
     {
         "require": {
+            "sensio/buzz-bundle": "*",                  # Only for Google provider on OAuth2
             "benji07/sso-bundle": "dev-develop"
         }
     }

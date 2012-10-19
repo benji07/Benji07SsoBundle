@@ -31,6 +31,7 @@
     # composer.json
     {
         "require": {
+            "sensio/buzz-bundle": "*",
             "benji07/sso-bundle": "dev-master"
         }
     }
