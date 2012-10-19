@@ -38,3 +38,13 @@ benji07_sso:
             service: benji07_sso.provider.google_apps
             options:
                 domain: %google_apps_domain%
+
+# Google OAuth provider
+
+    providers:
+        google:
+            service: benji07_sso.provider.google
+            options:
+                clientId: %google_client_id%
+                secretId: %google_secret_id%
+                scope: "https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile"

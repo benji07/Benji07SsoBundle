@@ -37,6 +37,11 @@
         <service id="benji07_sso.provider.google_apps" class="%benji07_sso.provider.google_apps.class%">
             <argument type="collection"></argument>
         </service>
+
+        <service id="benji07_sso.provider.google" class="%benji07_sso.provider.google.class%">
+            <argument type="collection"></argument>
+            <argument type="service" id="buzz" on-invalid="null" />
+        </service>
     </services>
 
 </container>
