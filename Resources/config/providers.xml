@@ -11,6 +11,7 @@
         <parameter key="benji07_sso.provider.oauth1.class">Benji07\SsoBundle\Providers\OAuth1aProvider</parameter>
         <parameter key="benji07_sso.provider.twitter.class">Benji07\SsoBundle\Providers\TwitterProvider</parameter>
         <parameter key="benji07_sso.provider.google_apps.class">Benji07\SsoBundle\Providers\GoogleAppsProvider</parameter>
+        <parameter key="benji07_sso.provider.google.class">Benji07\SsoBundle\Providers\GoogleProvider</parameter>
     </parameters>
 
     <services>
