@@ -8,7 +8,6 @@
         <parameter key="benji07_sso.provider.steam.class">Benji07\SsoBundle\Providers\SteamProvider</parameter>
         <parameter key="benji07_sso.provider.github.class">Benji07\SsoBundle\Providers\GithubProvider</parameter>
         <parameter key="benji07_sso.provider.facebook.class">Benji07\SsoBundle\Providers\FacebookProvider</parameter>
-        <parameter key="benji07_sso.provider.maniaplanet.class">Benji07\SsoBundle\Providers\ManiaplanetProvider</parameter>
     </parameters>
 
     <services>
