@@ -24,9 +24,6 @@
             <argument type="collection"></argument>
         </service>
 
-        <service id="gamercertified.provider.maniaplanet" class="%benji07_sso.provider.maniaplanet.class%">
-            <argument type="collection"></argument>
-        </service>
     </services>
 
 </container>
